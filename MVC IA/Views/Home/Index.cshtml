@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "ReparaYa!";
+}
+
+<link rel="stylesheet" href="~/css/mainstyle.css" />
+
+
+<div class="container-main">  
+    <div class="titulosuperior">
+    <div class="titulo">
+        <h3>ReparaYa!</h3>
+    </div>
+    <nav class="navegacionsuperior">
+        <a asp-controller="Home" asp-action="Nosotros">Nosotros</a>
+        <a asp-controller="Home" asp-action="Reparaciones">Reparaciones</a>
+        <a asp-controller="Home" asp-action="Servicios">Servicios</a>
+        <a asp-controller="Home" asp-action="Contacto">Contacto</a>
+        <a asp-controller="Home" asp-action="Login">Login/Registro</a>
+    </nav>
+    </div>
+
+    <div class="bienvenida">
+    <div class="contenido-bienvenida">
+        <h2>Bienvenido a Repara Ya!</h2>
+        <p>Repara tu pc con solo un click, sin moverte de tu casa</p>
+        <button class="btn-ver-mas">Ver Más</button>
+    </div>
+
+    <!-- Hero con la imagen de fondo a la derecha -->
+    <div class="imagen-hero-derecha">
+        <img src="~/img/imagenfondo2.jpeg" alt="Imagen de fondo" id="imagenIndex"/>
+    </div>
+    </div>
+
+</div>

@@ -1,0 +1,112 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Esto es crucial para que el background-size: cover funcione en el body */
+    width: 100%;
+}
+
+body {
+    /* Aquí NO VA la imagen de fondo si quieres que solo esté en la sección hero/bienvenida. */
+    /* Puedes poner un color de fondo general si lo deseas. */
+    background-color: #0056b3 ;
+}
+
+/* Estilos para la cabecera (titulosuperior) - Los que ya tienes, los ajusto a los colores del objetivo */
+.titulosuperior{
+    background-color: #0d47a1; /* Azul oscuro del diseño objetivo */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px; /* Un poco de padding para altura */
+    color: white; /* Color de texto blanco para la cabecera */
+}
+.titulo h3 {
+    margin: 0; /* Elimina el margen por defecto del h3 */
+    color: white; /* Color del texto del h3 */
+}
+
+.navegacionsuperior {
+    display: flex; /* Para que los enlaces estén en línea */
+    gap: 20px; /* Espacio entre los enlaces */
+}
+
+.navegacionsuperior a {
+    text-decoration: none; /* Quita el subrayado */
+    color: white; /* Color de los enlaces */
+}
+
+.nosotros-seccion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 20px;
+    background-color: #0d48a1ef;
+    min-height: 500px; /* un poco menos para que se vea compacta */
+    box-sizing: border-box;
+}
+
+.nosotros-contenido {
+    flex: 1; /* Permite que este elemento ocupe el espacio disponible */
+    max-width: 500px; /* Limita el ancho del texto para que no se estire demasiado */
+    margin-right: 30px; /* Espacio entre el texto y la imagen futura */
+    margin-left: 50px;
+    padding: 40px; /* Opcional: un poco de padding interno si necesitas */
+    color: white; /* Color del texto para contrastar con el fondo oscuro */
+    background-color: #0366fa77;
+    border-radius: 10px;
+    min-height: 400px;
+}
+
+.nosotros-contenido h2 {
+    font-size: 2.5em; /* Tamaño de fuente para el título "Nosotros" */
+    margin-top: 0; /* Elimina margen superior por defecto del h2 */
+    margin-bottom: 20px; /* Espacio entre el título y el párrafo */
+}
+
+.nosotros-contenido p {
+    font-size: 1.1em; /* Tamaño de fuente para el párrafo */
+    line-height: 1.6; /* Espaciado entre líneas para mejor lectura */
+}
+
+.botondiv{
+    margin: 0 auto;
+}
+    
+
+
+/* Estilos para el botón */
+.btn-diagn {
+    background-color: #0056b3; /* Color de fondo del botón (verde ejemplo) */
+    color: white;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px; /* Espacio encima del botón */
+    margin-right: 100px;
+    transition: background-color 0.3s ease;
+    margin: 0 auto;
+}
+
+.btn-diagn:hover {
+    background-color: #007bff73; /* Cambio de color al pasar el mouse */
+}
+
+.nosotros-imagen {
+    background-image: url('/img/imagenfondo.jpeg'); /* ruta exacta */
+    background-size: cover; /* La imagen cubre todo el cuadro */
+    background-repeat: no-repeat;
+    background-position: center; /* Centrada */
+    border-radius: 10px;
+    flex: 1; /* Que use el espacio disponible */
+    min-height: 500px; /* Aumenté la altura para que luzca bien */
+    max-width: 600px; /* Opcional: evita que crezca demasiado */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* un toque elegante */
+}
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Nosotros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/nosotrosstyle.css" />
+
+<div class="titulosuperior">
+    <div class="titulo">
+        <a asp-controller="Home" asp-action="Index">
+            <h3>ReparaYa!</h3>
+        </a>
+    </div>
+    <nav class="navegacionsuperior">
+        <a asp-controller="Home" asp-action="Nosotros">Nosotros</a>
+        <a asp-controller="Home" asp-action="Reparaciones">Reparaciones</a>
+        <a asp-controller="Home" asp-action="Servicios">Servicios</a>
+        <a asp-controller="Home" asp-action="Contacto">Contacto</a>
+    </nav>
+</div>
+
+<div class="seccionimg">
+    <div class="nosotros-seccion">
+        <div class="nosotros-contenido">
+            <h2>Nosotros</h2>
+            <p>
+                Somos un equipo apasionado por la tecnología que creó ReparaYa, una
+                plataforma web pensada para facilitar la reparación de computadoras
+                sin necesidad de moverte de casa. Combinamos inteligencia
+                artificial, automatización y diseño simple para brindarte un
+                servicio rápido, seguro y completamente online.
+            </p>
+            <div class="botondiv">
+                <button class="btn-diagn">Diagnostica y repara aquí</button>
+            </div>
+        </div>
+
+        <!-- AQUÍ VA EL CUADRO CON LA IMAGEN -->
+        <div class="nosotros-imagen"></div>
+    </div>
+</div>
+

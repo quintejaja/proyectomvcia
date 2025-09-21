@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Administrar Usuarios";
+    var usuarios = ViewBag.Usuarios as IEnumerable<dynamic>;
+}
+
+<h2>Usuarios Registrados</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in usuarios)
+        {
+            <tr>
+                <td>@u.IdUsuario</td>
+                <td>@u.Username</td>
+                <td>@u.Rol</td>
+                <td>
+                    <form asp-action="EliminarUsuario" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@u.IdUsuario" />
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este usuario?');">
+                            Eliminar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Volver</a>

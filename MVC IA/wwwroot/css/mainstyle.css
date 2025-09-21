@@ -1,0 +1,120 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden; /* Para evitar scroll horizontal */
+}
+
+
+/* Estilos para la cabecera (titulosuperior) - Los que ya tienes, los ajusto a los colores del objetivo */
+.titulosuperior{
+    background-color: #0d47a1; /* Azul oscuro del diseño objetivo */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px; /* Un poco de padding para altura */
+    color: white; /* Color de texto blanco para la cabecera */
+}
+
+.titulo h3 {
+    margin: 0; /* Elimina el margen por defecto del h3 */
+    color: white; /* Color del texto del h3 */
+}
+
+.navegacionsuperior {
+    display: flex; /* Para que los enlaces estén en línea */
+    gap: 20px; /* Espacio entre los enlaces */
+}
+
+.navegacionsuperior a {
+    text-decoration: none; /* Quita el subrayado */
+    color: white; /* Color de los enlaces */
+}
+
+/* *** ESTILOS PARA LA SECCIÓN DE BIENVENIDA (HERO) *** */
+.bienvenida {
+    display: flex;
+    height: 100vh; /* Toda la altura de la pantalla */
+    width: 100vw; /* Toda la anchura de la pantalla */
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+    background-color: #f0f0f0;
+    box-sizing: border-box; /* Para que el padding no rompa el ancho */
+}
+
+
+.contenido-bienvenida {
+    flex: 1; /* Ocupa una parte del ancho disponible */
+    padding: 10px 40px; /* Espaciado interno para el texto */
+    text-align: left;
+    background-color: #0d48a16e;
+    border-radius: 10px;
+    margin-right: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+}
+
+.contenido-bienvenida h2 {
+    font-size: 3em; /* Tamaño grande para el título */
+    color: white; /* Color del título */
+    margin-bottom: 10px;
+}
+
+.contenido-bienvenida p {
+    font-size: 1.2em; /* Tamaño para el párrafo */
+    color: white;
+    margin-bottom: 20px;
+}
+
+.btn-ver-mas {
+    background-color: #007bff; /* Color del botón */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+}
+
+.btn-ver-mas:hover {
+    background-color: #0056b3; /* Color del botón al pasar el mouse */
+}
+
+#imagenIndex {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* hace que se recorte/adapte */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.imagen-hero-derecha {
+    flex: 1.5;
+    height: 100%;
+}
+
+
+.container-main {
+    width: 100%;
+    min-height: 100vh; /* Asegura que al menos ocupe toda la pantalla */
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+
+
+.main-wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+
+/*.renderbody {
+    width: auto;
+    height: auto;
+}*/
