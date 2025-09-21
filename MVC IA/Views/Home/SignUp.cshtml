@@ -2,65 +2,49 @@
 
 @{
     ViewData["Title"] = "SignUp";
+    Layout = null;
 }
 
-<h1>SignUp</h1>
+<link rel="stylesheet" href="~/css/Login&Registrostyles.css" />
 
-<h4>Usuario</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        @if (ViewBag.Notification != null)
-        {
-            <div class="alert alert-danger">
-                @ViewBag.Notification
-            </div>
-        }
-
-        <form asp-action="SignUp" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <!-- Username -->
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
+<div class="container">
+    <div class="form-box">
+        <h2>Crear Cuenta</h2>
+        <form asp-action="SignUp" asp-controller="Home" method="post">
+            <div class="input-group">
+                <label asp-for="Username">Usuario</label>
+                <input asp-for="Username" type="text" required />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
 
-            <!-- Password -->
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" type="password" />
+            <div class="input-group">
+                <label asp-for="Password">Contraseña</label>
+                <input asp-for="Password" type="password" required />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label for="ConfirmPassword">Repetir contraseña</label>
-                <input type="password" name="ConfirmPassword" class="form-control" />
+            <div class="input-group">
+                <label for="ConfirmPassword">Repetir Contraseña</label>
+                <input id="ConfirmPassword" name="ConfirmPassword" type="password" required />
                 <span class="text-danger">@ViewBag.ConfirmPasswordError</span>
             </div>
 
-            <!-- Rol (como dropdown) -->
             <div class="form-group">
                 <label asp-for="RolId" class="control-label"></label>
                 <select asp-for="RolId" asp-items="ViewBag.Roles" class="form-control"></select>
                 <span asp-validation-for="RolId" class="text-danger"></span>
             </div>
 
-            <!-- Botón -->
-            <div class="form-group">
-                <input type="submit" value="Registrarse" class="btn btn-primary" />
-            </div>
+            <button type="submit" class="btn">Registrarse</button>
         </form>
+        <p>
+            ¿Ya tienes cuenta?
+            <a asp-action="Login" asp-controller="Home">Inicia Sesión</a>
+        </p>
+
+        @if (ViewBag.Notification != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Notification</div>
+        }
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Volver al inicio</a>
-</div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

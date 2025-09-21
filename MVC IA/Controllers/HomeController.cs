@@ -37,10 +37,11 @@ namespace MVC_IA.Controllers
         public IActionResult SignUp()
         {
             ViewBag.Roles = new SelectList(db.Roles.ToList(), "IdRol", "TipoRol");
-            return View();
+            return View("SignUp"); // que use tu vista de registro
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult SignUp(Usuario usuario)
         {
             // tomamos la contraseña repetida desde el formulario manualmente
@@ -52,23 +53,28 @@ namespace MVC_IA.Controllers
                 ViewBag.Notification = "Las contraseñas no coinciden.";
                 ViewBag.ConfirmPasswordError = "Las contraseñas no coinciden.";
                 ViewBag.Roles = new SelectList(db.Roles.ToList(), "IdRol", "TipoRol");
-                return View();
+                return View("SignUp");
             }
 
-            // normalizamos el username que viene del formulario
+            // normalizamos el username
             usuario.Username = usuario.Username.Trim().ToLower();
 
-            // verificamos si el usuario ya existe (sin importar mayúsculas/minúsculas)
+            // verificamos si el usuario ya existe
             if (db.Usuarios.Any(x => x.Username.ToLower() == usuario.Username))
             {
                 ViewBag.Notification = "Este usuario ya existe.";
                 ViewBag.Roles = new SelectList(db.Roles.ToList(), "IdRol", "TipoRol");
-                return View();
+                return View("SignUp");
             }
+
+            // si no tiene rol asignado, lo ponemos por defecto en 2 (usuario común)
+            if (usuario.RolId == 0)
+                usuario.RolId = 2;
 
             db.Usuarios.Add(usuario);
             db.SaveChanges();
 
+            // iniciamos sesión
             HttpContext.Session.SetString("idUsuario", usuario.IdUsuario.ToString());
             HttpContext.Session.SetString("username", usuario.Username);
             HttpContext.Session.SetString("rol", usuario.RolId.ToString());
@@ -76,6 +82,7 @@ namespace MVC_IA.Controllers
             return RedirectToAction("Index", "Home");
         }
         #endregion
+
 
         #region Login - LogOut
         public IActionResult Login()
@@ -87,32 +94,27 @@ namespace MVC_IA.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(Usuario usuario)
         {
-            //busca un usuario con ese nombre y contraseña exactos
-            //var user = db.Usuarios.Where(x =>
-            //    x.Username == usuario.Username &&
-            //    x.Password == usuario.Password);
-
-            var user = db.Usuarios.Where(x => x.Username.Equals(usuario.Username) && x.Password.Equals(usuario.Password)).FirstOrDefault(); 
+            var user = db.Usuarios
+                .Where(x => x.Username.Equals(usuario.Username) && x.Password.Equals(usuario.Password))
+                .FirstOrDefault();
 
             if (user != null)
             {
-                //si lo encontró, guarda en sesión y redirige
-               // HttpContext.Session.SetString("idUsuario", user.IdUsuario.ToString());
-                HttpContext.Session.SetString("username", usuario.Username);
-                HttpContext.Session.SetString("password", usuario.Password);
-
-                //HttpContext.Session.SetString("rol", usuario.RolId.ToString());
+                // Guardamos los datos en sesión
+                HttpContext.Session.SetString("idUsuario", user.IdUsuario.ToString());
+                HttpContext.Session.SetString("username", user.Username);
+                HttpContext.Session.SetString("rol", user.RolId.ToString());
 
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                //si no lo encontró, muestra mensaje de error
                 ViewBag.Notification = "Usuario o contraseña incorrectos.";
-                
             }
+
             return View();
         }
+
 
         #endregion
 
