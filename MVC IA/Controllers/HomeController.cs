@@ -9,16 +9,20 @@ namespace MVC_IA.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ProyectoDbContext db; //se declara cosa que accede al contexto de la base de datos
+        private readonly ProyectoDbContext db;
 
         public HomeController(ILogger<HomeController> logger, ProyectoDbContext _db)
         {
             _logger = logger;
-            db = _db; //se guarda el contexto de la db en esta variable
+            db = _db;
         }
 
         public IActionResult Index()
         {
+            // Get username from session and pass it to the view
+            var username = HttpContext.Session.GetString("username");
+            ViewBag.Username = username;
+
             return View();
         }
 
@@ -37,7 +41,7 @@ namespace MVC_IA.Controllers
         public IActionResult SignUp()
         {
             ViewBag.Roles = new SelectList(db.Roles.ToList(), "IdRol", "TipoRol");
-            return View("SignUp"); // que use tu vista de registro
+            return View("SignUp");
         }
 
         [HttpPost]
@@ -83,7 +87,6 @@ namespace MVC_IA.Controllers
         }
         #endregion
 
-
         #region Login - LogOut
         public IActionResult Login()
         {
@@ -114,8 +117,6 @@ namespace MVC_IA.Controllers
 
             return View();
         }
-
-
         #endregion
 
         public IActionResult Logout()
@@ -168,9 +169,36 @@ namespace MVC_IA.Controllers
 
         public IActionResult Nosotros()
         {
+            // Pasar el username a la vista Nosotros también si es necesario
+            var username = HttpContext.Session.GetString("username");
+            ViewBag.Username = username;
             return View();
         }
 
+        public IActionResult LoginRegistro()
+        {
+            return View();
+        }
 
+        public IActionResult Reparaciones()
+        {
+            var username = HttpContext.Session.GetString("username");
+            ViewBag.Username = username;
+            return View();
+        }
+
+        public IActionResult Servicios()
+        {
+            var username = HttpContext.Session.GetString("username");
+            ViewBag.Username = username;
+            return View();
+        }
+
+        public IActionResult Contacto()
+        {
+            var username = HttpContext.Session.GetString("username");
+            ViewBag.Username = username;
+            return View();
+        }
     }
 }
