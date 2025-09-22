@@ -16,17 +16,6 @@
         <a asp-controller="Home" asp-action="Reparaciones">Reparaciones</a>
         <a asp-controller="Home" asp-action="Servicios">Servicios</a>
         <a asp-controller="Home" asp-action="Contacto">Contacto</a>
-            @if (string.IsNullOrEmpty(username))
-            {
-                <!-- Si NO está logueado -->
-                <a asp-controller="Home" asp-action="LoginRegistro">Login/Registro</a>
-            }
-            else
-            {
-                <!-- Si está logueado -->
-                <span>Hola, @username</span>
-                <a asp-controller="Home" asp-action="Logout">Salir</a>
-            }
     </nav>
     </div>
 
