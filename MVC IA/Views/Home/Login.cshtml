@@ -9,6 +9,11 @@
 <script src="~/js/Login&RegistroScript.js"></script>
 
 <div class="container">
+
+    <div class="back-button-container">
+        <a href="@Url.Action("Index", "Home")" class="btn-back-link">&larr; Volver al Inicio</a>
+    </div>
+
     <div class="form-box">
         <h2>Iniciar Sesión</h2>
         <form asp-action="Login" asp-controller="Home" method="post">

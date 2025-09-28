@@ -1,11 +1,10 @@
 ﻿@model MVC_IA.Models.Usuario
 @{
     ViewData["Title"] = "Login / Registro";
-    Layout = null; // o null si no querés layout
+    Layout = null; 
 }
 
 <div class="container mt-5">
-    <!-- Caja Login -->
     <div id="login-box" class="card p-4 shadow">
         <h2 class="mb-3">Iniciar Sesión</h2>
         <form asp-action="Login" asp-controller="Home" method="post">
@@ -32,7 +31,6 @@
         }
     </div>
 
-    <!-- Caja Registro (oculta al inicio) -->
     <div id="register-box" class="card p-4 shadow hidden">
         <h2 class="mb-3">Crear Cuenta</h2>
         <form asp-action="SignUp" asp-controller="Home" method="post">
@@ -65,10 +63,8 @@
     </div>
 </div>
 
-<!-- Importar tu script -->
 <script src="~/js/Login&RegistroScript.js"></script>
 
-<!-- Estilo extra para ocultar -->
 <style>
     .hidden {
         display: none;
