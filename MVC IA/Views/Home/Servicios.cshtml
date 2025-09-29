@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Servicios";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/Serviciosstyle.css">
+
+<div class="Servicio">
+    <h1>Servicios</h1>
+</div>
+
+<section class="SeccionServicios">
+    <div class="Container-Servicios">
+        <div class="Tarjeta-Servicios">
+            <div class="Tarjeta-Imagen">
+                <img src="~/img/man-8106958.svg" alt="Diagnóstico">
+            </div>
+            <div class="Tarjeta-Contenido">
+                <h3>Diagnostico Inicial</h3>
+                <p>Diagnostico inicial y presupuesto estimado</p>
+                <div class="Precio">$30</div>
+                <button class="Reserva">Reserva ahora!</button>
+            </div>
+        </div>
+
+        <div class="Tarjeta-Servicios">
+            <div class="Tarjeta-Imagen">
+                <img src="~/img/store-4156934.svg" alt="Insumos">
+            </div>
+            <div class="Tarjeta-Contenido">
+                <h3>Venta de insumos</h3>
+                <p>Venta de componentes e insumos de informatica</p>
+                <div class="Precio">$30</div>
+                <button class="Reserva">Reserva ahora!</button>
+            </div>
+        </div>
+
+        <div class="Tarjeta-Servicios">
+            <div class="Tarjeta-Imagen">
+                <img src="~/img/template-1599663.svg" alt="Reparación">
+            </div>
+            <div class="Tarjeta-Contenido">
+                <h3>Reparacion completa</h3>
+                <p>Reparacion exhaustiva de tu equipo</p>
+                <div class="Precio">$30</div>
+                <button class="Reserva">Reserva ahora!</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/ServiciosJS.js"></script>
+}
