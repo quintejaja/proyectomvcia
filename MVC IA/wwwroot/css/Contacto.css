@@ -1,0 +1,114 @@
+﻿html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    /* Aplicamos la fuente Roboto descargada en el HTML */
+    font-family: 'Roboto', sans-serif;
+    color: white; /* Color de texto base blanco */
+}
+
+body {
+    /* Mantenemos tu color de fondo principal */
+    background-color: #0056b3;
+    /* Usamos un degradado sutil para darle más profundidad */
+    min-height: 100vh; /* Asegura que el cuerpo ocupe toda la altura */
+    display: flex; /* Flexbox para manejar el contenido de la página */
+    flex-direction: column; /* Organiza elementos de arriba a abajo */
+}
+
+
+/*
+ * --------------------------------
+ * ESTILOS DE LA BARRA SUPERIOR (HEADER)
+ * --------------------------------
+ */
+.titulosuperior {
+    background-color: #0d47a1; /* Azul oscuro del diseño objetivo */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px; /* Más padding para que la barra se sienta más grande */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.titulo a {
+    text-decoration: none; /* Quita el subrayado del enlace del título */
+}
+
+.titulo h3 {
+    margin: 0;
+    color: white;
+    font-size: 1.8rem; /* Tamaño de letra más grande para el título */
+    font-weight: 700;
+}
+
+.navegacionsuperior {
+    display: flex;
+    gap: 30px; /* Mayor espacio entre enlaces */
+}
+
+    .navegacionsuperior a {
+        text-decoration: none;
+        color: white;
+        font-size: 1.1rem; /* Letras de navegación más grandes */
+        padding: 5px 10px;
+        transition: background-color 0.3s, color 0.3s; /* Transición suave para el hover */
+    }
+
+        .navegacionsuperior a:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Efecto hover sutil */
+            border-radius: 5px;
+        }
+
+
+/*
+ * --------------------------------
+ * ESTILOS DEL PIE DE PÁGINA (SECINFO)
+ * --------------------------------
+ */
+.secinfo {
+    /* El pie de página se extiende a lo ancho y tiene un fondo propio */
+    margin-top: auto; /* Empuja el footer hacia abajo si el contenido es corto */
+    padding: 40px;
+    background-color: #004085; /* Un tono un poco más oscuro que el fondo del body */
+    display: flex;
+    justify-content: space-around; /* Distribuye el espacio entre los 3 bloques */
+    align-items: flex-start; /* Alinea los elementos a la parte superior */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    gap: 30px;
+}
+
+    .secinfo h4 {
+        font-size: 1.4rem; /* Título de sección más grande */
+        margin-top: 0;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ffffff; /* Separador sutil */
+        padding-bottom: 5px;
+    }
+
+/* Estilos de Contacto */
+.infocontacto, .infopoliticas {
+    /* Ancho flexible para los bloques de texto */
+    flex: 1;
+    min-width: 250px; /* Mínimo para evitar que se aplasten */
+}
+
+    .infocontacto p, .politicas p {
+        font-size: 1.15rem; /* Letras del contenido grandes y legibles */
+        line-height: 1.8; /* Mayor espacio entre líneas */
+        margin: 5px 0;
+    }
+
+/* Estilos del Logo */
+.logop {
+    display: flex;
+    justify-content: center; /* Centra el logo dentro de su contenedor */
+    align-items: center;
+    flex-basis: 150px; /* Un tamaño fijo para el logo */
+}
+
+    .logop img {
+        width: 150px; /* Logo más grande */
+        height: auto; /* Mantiene la proporción */
+    }

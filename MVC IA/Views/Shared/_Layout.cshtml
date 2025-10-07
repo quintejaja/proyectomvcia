@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/mainstyle.css" />
     <link rel="stylesheet" href="~/MVC_IA.styles.css" asp-append-version="true" />
+    <link href="" />
 </head>
 <body>
     <header>
@@ -47,11 +48,24 @@
                             else
                             {
                                 <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Nosotros">Nosotros</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Servicios">Servicios</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Contacto">Contacto</a>
+                                </li>
+
+                                <li class="nav-item">
                                     <a class="nav-link text-dark" asp-controller="Home" asp-action="Login">Iniciar sesión</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-controller="Home" asp-action="SignUp">Registrarse</a>
                                 </li>
+
                             }
                         </ul>
 
