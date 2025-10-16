@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Calendario";
+    Layout = null;
+}
+
+    <title>Programar Servicio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="~/css/Calendario.css">
+
+
+
+    <main class="schedule-container">
+        <div class="schedule-header">
+        @* <a href="" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+                Volver
+            </a> *@
+        <a asp-controller="Home" asp-action="Servicios" class="back-link">
+            < Volver
+        </a>
+            <h1>Programa tu servicio</h1>
+            <p>Revisa nuestra disponibilidad y reserva la fecha y hora que más te convengan</p>
+        </div>
+
+        <div class="schedule-grid">
+            <div class="calendar-section">
+                <h3>Selecciona fecha y hora</h3>
+                <p class="timezone-text">hora estándar de Argentina (ART)</p>
+
+                <div class="calendar-header">
+                    <button class="nav-button" id="prevMonth">&lt;</button>
+                    <h4 id="currentMonthYear"></h4>
+                    <button class="nav-button" id="nextMonth">&gt;</button>
+                </div>
+
+                <div class="calendar-grid-days">
+                    <span>dom</span><span>lun</span><span>mar</span><span>mié</span><span>jue</span><span>vie</span><span>sáb</span>
+                </div>
+                <div class="calendar-grid" id="calendarGrid">
+                </div>
+            </div>
+
+            <div class="time-slots-section">
+                <p id="timeSlotsDate">Disponibilidad para:</p>
+                <div class="time-slots-grid" id="timeSlotsGrid">
+                </div>
+            </div>
+
+            <div class="service-details-section">
+                <h3>Detalles del servicio</h3>
+                <div class="details-content">
+                    <p>Diagnóstico Inicial</p>
+                    <p id="selectedDateTime">Selecciona una fecha y hora</p>
+                    <p>100% Online</p>
+                    <p>Miembro del equipo n.º 1</p>
+                    <p>1h</p>
+                    <p id="servicePrice">$30</p>
+                </div>
+                <button class="next-button" id="nextButton" disabled>Siguiente</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="~/js/Calendario.js"></script>

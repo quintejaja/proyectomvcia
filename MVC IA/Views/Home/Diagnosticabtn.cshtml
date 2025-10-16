@@ -1,0 +1,119 @@
+﻿
+    <link rel="stylesheet" href="~/css/Diagnosticabtn.css">
+    <title>Diagnostica y repara aqui!</title>
+    
+
+
+<section id="diagnostico-form" class="form-section">
+    <div class="form-container">
+        <h2>Detalles del Diagnóstico</h2>
+
+        <form action="#" method="POST" enctype="multipart/form-data">
+
+            <div class="login-prompt">
+                <span>¿Ya tienes una cuenta? <a href="#">Inicia sesión</a></span>
+            </div>
+
+            <div class="form-group-row">
+                <div class="form-field">
+                    <label for="nombre">Nombre *</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-field">
+                    <label for="apellido">Apellido *</label>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+            </div>
+
+            <div class="form-group-row">
+                <div class="form-field">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-field">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono">
+                </div>
+            </div>
+
+            <div class="form-field full-width">
+                <label for="problema">Describe el problema que tiene tu equipo lo más claro posible *</label>
+                <textarea id="problema" name="problema" rows="4" required></textarea>
+                <small>Este campo nos ayudará a realizar un diagnóstico sobre las fallas de tu equipo para poder repararlo, se lo más detallado posible.</small>
+            </div>
+
+            <fieldset class="form-fieldset full-width">
+                <legend>Tipo de Equipo</legend>
+                <label><input type="radio" name="tipo_equipo" value="portatil" required> PC portátil/ Laptop/Netbook</label>
+                <label><input type="radio" name="tipo_equipo" value="escritorio"> PC de escritorio</label>
+            </fieldset>
+
+            <fieldset class="form-fieldset full-width">
+                <legend>Sistema Operativo</legend>
+                <label><input type="radio" name="so" value="win7" required> Win 7</label>
+                <label><input type="radio" name="so" value="win10"> Win 10</label>
+                <label><input type="radio" name="so" value="linux"> Linux</label>
+                <label><input type="radio" name="so" value="macos"> MacOS</label>
+            </fieldset>
+
+            <div class="form-field full-width">
+                <label for="fabricacion">Año de fabricación del equipo</label>
+                <input type="number" id="fabricacion" name="fabricacion" min="1990" max="2099">
+            </div>
+
+            <div class="form-field full-width">
+                <label for="pais">País/región *</label>
+                <select id="pais" name="pais" required>
+                    <option value="">Selecciona un país</option>
+                    <option value="argentina">Argentina</option>
+                    <option value="chile">Chile</option>
+                </select>
+            </div>
+
+            <div class="form-field full-width">
+                <label for="direccion">Dirección *</label>
+                <input type="text" id="direccion" name="direccion" required>
+            </div>
+
+            <div class="form-group-row">
+                <div class="form-field">
+                    <label for="ciudad">Ciudad *</label>
+                    <input type="text" id="ciudad" name="ciudad" required>
+                </div>
+                <div class="form-field">
+                    <label for="codigo_postal">Código postal *</label>
+                    <input type="text" id="codigo_postal" name="codigo_postal" required>
+                </div>
+            </div>
+
+        </form>
+
+        <aside class="reserva-details">
+            <h3>Detalles de la reserva</h3>
+
+            <p>Servicio: <strong id="displayServicio">Diagnóstico Inicial</strong></p>
+            <p>Fecha y Hora: <span id="displayFechaHora"></span></p>
+            <hr>
+
+            <h4>Datos del Cliente:</h4>
+            <p>Cliente: <strong id="displayNombreCompleto"></strong></p>
+            <p>Email: <span id="displayEmail"></span></p>
+            <p>Teléfono: <span id="displayTelefono"></span></p>
+            <hr>
+
+            <h4>Detalles del Equipo:</h4>
+            <p>Tipo: <span id="displayTipoEquipo"></span></p>
+            <p>OS: <span id="displayOS"></span></p>
+            <p>Año: <span id="displayFabricacion"></span></p>
+            <p>País: <span id="displayPais"></span></p>
+            <hr>
+
+            <h4>Problema:</h4>
+            <p id="displayProblema" class="problema-preview">Esperando descripción...</p>
+            <hr>
+
+        </aside>
+    </div>
+</section>
+
+<script src="~/js/LogicaFormulario.js"></script>

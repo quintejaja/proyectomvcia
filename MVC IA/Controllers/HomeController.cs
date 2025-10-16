@@ -194,13 +194,25 @@ namespace MVC_IA.Controllers
             return View();
         }
 
-        public IActionResult Contacto()
+        public IActionResult Calendario()
         {
             var username = HttpContext.Session.GetString("username");
             ViewBag.Username = username;
             return View();
         }
 
+        public IActionResult Diagnosticabtn()
+        {
+            var username = HttpContext.Session.GetString("username");
+            ViewBag.Username = username;
+            return View();
+        }
 
+        public IActionResult Contacto()
+        {
+            var username = HttpContext.Session.GetString("username");
+            ViewBag.Username = username;
+            return View();
+        }
     }
 }
