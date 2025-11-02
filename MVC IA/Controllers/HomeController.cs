@@ -214,5 +214,44 @@ namespace MVC_IA.Controllers
             ViewBag.Username = username;
             return View();
         }
+
+        // EN HomeController.cs
+
+        // Modelo simple para recibir la fecha del JavaScript
+        public class FechaRequest
+        {
+            public string Fecha { get; set; }
+        }
+
+        [HttpPost]
+        public JsonResult ObtenerDisponibilidad([FromBody] FechaRequest request)
+        {
+            // Convertir la fecha recibida para asegurar que es válida
+            if (DateTime.TryParse(request.Fecha, out DateTime fechaSeleccionada))
+            {
+                // 1. SIMULACIÓN: Días disponibles (ej: solo días de semana)
+                if (fechaSeleccionada.DayOfWeek == DayOfWeek.Saturday || fechaSeleccionada.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    // Devolver lista vacía si es fin de semana
+                    return Json(new List<string>());
+                }
+
+                // 2. SIMULACIÓN: Generar intervalos de 2 horas (de 10:00 a 18:00)
+                var horasDisponibles = new List<string>();
+                // Itera de 10 AM a 4 PM (el último intervalo será 16:00 - 18:00)
+                for (int hora = 10; hora <= 16; hora += 2)
+                {
+                    // Formato HH:MM - HH:MM
+                    string inicio = $"{hora:00}:00";
+                    string fin = $"{(hora + 2):00}:00";
+                    horasDisponibles.Add($"{inicio} - {fin}");
+                }
+
+                return Json(horasDisponibles);
+            }
+
+            // Si la fecha no es válida, devolver lista vacía
+            return Json(new List<string>());
+        }
     }
 }
