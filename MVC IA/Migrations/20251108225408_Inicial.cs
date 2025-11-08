@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -46,16 +47,54 @@ namespace MVC_IA.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Citas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FechaHora = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DescripcionProblema = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    IdCliente = table.Column<int>(type: "int", nullable: false),
+                    TecnicoId = table.Column<int>(type: "int", nullable: true),
+                    Estado = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Citas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Citas_Usuarios_IdCliente",
+                        column: x => x.IdCliente,
+                        principalTable: "Usuarios",
+                        principalColumn: "IdUsuario",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Citas_Usuarios_TecnicoId",
+                        column: x => x.TecnicoId,
+                        principalTable: "Usuarios",
+                        principalColumn: "IdUsuario",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "IdRol", "TipoRol" },
                 values: new object[,]
                 {
                     { 1, "Admin" },
-                    { 2, "Usuario" },
-                    { 3, "Cliente" },
-                    { 4, "Tecnico" }
+                    { 2, "Cliente" },
+                    { 3, "Tecnico" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Citas_IdCliente",
+                table: "Citas",
+                column: "IdCliente");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Citas_TecnicoId",
+                table: "Citas",
+                column: "TecnicoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_RolId",
@@ -66,6 +105,9 @@ namespace MVC_IA.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Citas");
+
             migrationBuilder.DropTable(
                 name: "Usuarios");
 

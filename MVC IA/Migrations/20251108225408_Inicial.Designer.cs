@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_IA.Migrations
 {
     [DbContext(typeof(ProyectoDbContext))]
-    [Migration("20251103193232_CorregirCicloYFinalizarReserva")]
-    partial class CorregirCicloYFinalizarReserva
+    [Migration("20251108225408_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,17 +46,17 @@ namespace MVC_IA.Migrations
                     b.Property<DateTime>("FechaHora")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TecnicoId")
+                    b.Property<int>("IdCliente")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsuarioId")
+                    b.Property<int?>("TecnicoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TecnicoId");
+                    b.HasIndex("IdCliente");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("TecnicoId");
 
                     b.ToTable("Citas");
                 });
@@ -86,16 +86,11 @@ namespace MVC_IA.Migrations
                         new
                         {
                             IdRol = 2,
-                            TipoRol = "Usuario"
-                        },
-                        new
-                        {
-                            IdRol = 3,
                             TipoRol = "Cliente"
                         },
                         new
                         {
-                            IdRol = 4,
+                            IdRol = 3,
                             TipoRol = "Tecnico"
                         });
                 });
@@ -128,21 +123,20 @@ namespace MVC_IA.Migrations
 
             modelBuilder.Entity("MVC_IA.Models.Cita", b =>
                 {
-                    b.HasOne("MVC_IA.Models.Usuario", "Tecnico")
-                        .WithMany()
-                        .HasForeignKey("TecnicoId")
+                    b.HasOne("MVC_IA.Models.Usuario", "Cliente")
+                        .WithMany("CitasComoCliente")
+                        .HasForeignKey("IdCliente")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MVC_IA.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("MVC_IA.Models.Usuario", "Tecnico")
+                        .WithMany("CitasComoTecnico")
+                        .HasForeignKey("TecnicoId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Cliente");
 
                     b.Navigation("Tecnico");
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("MVC_IA.Models.Usuario", b =>
@@ -154,6 +148,13 @@ namespace MVC_IA.Migrations
                         .IsRequired();
 
                     b.Navigation("Rol");
+                });
+
+            modelBuilder.Entity("MVC_IA.Models.Usuario", b =>
+                {
+                    b.Navigation("CitasComoCliente");
+
+                    b.Navigation("CitasComoTecnico");
                 });
 #pragma warning restore 612, 618
         }
