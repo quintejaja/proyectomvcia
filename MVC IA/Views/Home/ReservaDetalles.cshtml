@@ -1,0 +1,81 @@
+﻿
+<div class="main-form-container">
+
+    <div class="form-column">
+        <h2>Detalles del Diagnóstico</h2>
+
+        <form method="post" asp-controller="Home" asp-action="ProcesarReserva">
+
+            <fieldset class="form-fieldset half-width">
+                <legend>Datos del Cliente</legend>
+                <div class="form-group">
+                    <label for="nombre">Nombre *</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido *</label>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="telefono">Teléfono *</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-fieldset full-width">
+                <legend>Describe el problema que tiene tu equipo lo más claro posible *</legend>
+                <textarea id="problema" name="problema" rows="5" required></textarea>
+                <small>Este campo nos ayudará a realizar un diagnóstico sobre las fallas de tu equipo para poder repararlo, sé lo más detallado posible.</small>
+            </fieldset>
+
+            <fieldset class="form-fieldset full-width">
+                <legend>Tipo de Equipo</legend>
+                <div class="card-selection-group">
+                    <label class="selection-card"><input type="radio" name="tipo_equipo" value="portatil" required><span>PC portátil/ Laptop/Netbook</span></label>
+                    <label class="selection-card"><input type="radio" name="tipo_equipo" value="escritorio"><span>PC de escritorio</span></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-fieldset full-width">
+                <legend>Sistema Operativo</legend>
+                <div class="card-selection-group">
+                    <label class="selection-card"><input type="radio" name="so" value="win7" required><span>Win 7</span></label>
+                    <label class="selection-card"><input type="radio" name="so" value="win10"><span>Win 10</span></label>
+                    <label class="selection-card"><input type="radio" name="so" value="linux"><span>Linux</span></label>
+                    <label class="selection-card"><input type="radio" name="so" value="macos"><span>MacOS</span></label>
+                </div>
+            </fieldset>
+
+            <input type="hidden" name="fechaReserva" value="@ViewBag.FechaSeleccionada" />
+            <input type="hidden" name="horaReserva" value="@ViewBag.HoraSeleccionada" />
+
+            <button type="submit" class="submit-button">Confirmar Reserva</button>
+        </form>
+    </div>
+
+    <div class="details-column">
+        <aside class="reserva-details">
+            <h3>Detalles de la reserva</h3>
+
+            <p>Servicio: <strong>Diagnóstico Inicial</strong></p>
+
+            <p>Fecha:</p>
+            <strong class="display-value">@ViewBag.FechaDisplay</strong>
+
+            <p>Hora:</p>
+            <strong class="display-value">@ViewBag.HoraSeleccionada</strong>
+
+            <hr>
+
+            <p>Formato: <strong>100% Online</strong></p>
+            <p>Duración: <strong>1h</strong></p>
+            <p>Costo: <strong>Sin costo (Autodiagnóstico)</strong></p>
+
+        </aside>
+    </div>
+</div>
+<lin

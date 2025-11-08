@@ -1,122 +1,134 @@
+/* ==================================
+   CONFIGURACIÓN GENERAL
+================================== */
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%; /* Esto es crucial para que el background-size: cover funcione en el body */
     width: 100%;
 }
 
 body {
-    /* Aquí NO VA la imagen de fondo si quieres que solo esté en la sección hero/bienvenida. */
-    /* Puedes poner un color de fondo general si lo deseas. */
-    background-color: #0056b3 ;
+    background-color: #f4f7f6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Estilos para la cabecera (titulosuperior) - Los que ya tienes, los ajusto a los colores del objetivo */
-.titulosuperior{
-    background-color: #0d47a1; /* Azul oscuro del diseño objetivo */
+/* ==================================
+   CONTENEDOR PRINCIPAL DE SERVICIOS
+================================== */
+.SeccionServicios {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px; /* Un poco de padding para altura */
-    color: white; /* Color de texto blanco para la cabecera */
-}
-.titulo h3 {
-    margin: 0; /* Elimina el margen por defecto del h3 */
-    color: white; /* Color del texto del h3 */
-}
-
-.navegacionsuperior {
-    display: flex; /* Para que los enlaces estén en línea */
-    gap: 20px; /* Espacio entre los enlaces */
-}
-
-.navegacionsuperior a {
-    text-decoration: none; /* Quita el subrayado */
-    color: white; /* Color de los enlaces */
-}
-
-.Tarjeta-Imagen {
-    
-    width: 100%;
-    height: 300px; /* Altura fija para las imágenes */
-     /* Asegura que la imagen cubra el área sin distorsionarse */
-    display: flex; /* Elimina espacios extra debajo de la imagen */
-}
-
-.Tarjeta-Imagen img {
-    object-fit: cover;
-    width: 100%;
-    height: 300px;
-}
-
-.SeccionServicios{
-    display: flex;
-    height: 100%;
     justify-content: center;
     align-items: center;
+    padding: 60px 15px;
 }
 
-.Container-Servicios{
+.Container-Servicios {
     display: flex;
-    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan a la siguiente línea */
-    justify-content: center; /* Centra las tarjetas horizontalmente */
-    align-items: center;
-    gap: 20px; /* Espacio entre las tarjetas */
-    max-width: 1500px; /* Ancho máximo del contenedor */
-    width: 100%; 
-    height: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
 }
+
+/* ==================================
+   LAS TARJETAS DE SERVICIO
+================================== */
 .Tarjeta-Servicios {
-    background-color: #2e4d58; /* Color de fondo similar al de tu imagen */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow: hidden; /* Para que la imagen se ajuste al border-radius */
-    width: 400px; /* Ancho fijo para las tarjetas, ajusta según necesites */
-    height: 500px;
-    display: flex;
-    flex-direction: column; /* Coloca la imagen y el contenido en columna */
-    color: #e0e0e0; /* Color de texto claro */
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para el hover */
-}
-
-.Tarjeta-Contenido{
-    padding: 20px;
+    background-color: #2e4d58; /* Tu color oscuro para las tarjetas */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 350px;
     display: flex;
     flex-direction: column;
-
-    justify-content: flex-start; /* Distribuye el espacio entre los elementos */
+    color: #e0e0e0;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.Tarjeta-Contenido h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: #4CAF50; /* Un color de título que resalte, similar al de tu imagen */
+    .Tarjeta-Servicios:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+/* ==================================
+   IMAGEN DE LA TARJETA (AJUSTE PARA FOTOS)
+================================== */
+.Tarjeta-Imagen {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Importante para que 'cover' no se desborde */
 }
 
-.Tarjeta-Contenido p {
-    font-size: 0.9em;
-    color: #b0b0b0;
-    margin-bottom: 15px;
-    flex-grow: 1; /* Permite que la descripción ocupe el espacio si es más larga */
+    .Tarjeta-Imagen img {
+        width: 100%;
+        height: 100%;
+        /* 'cover' hace que la foto llene el espacio */
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+/* Efecto de zoom en la imagen al pasar el mouse por la tarjeta */
+.Tarjeta-Servicios:hover .Tarjeta-Imagen img {
+    transform: scale(1.1);
 }
 
-.card-content .precio {
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea divisoria */
+/* ==================================
+   CONTENIDO DE LA TARJETA
+================================== */
+.Tarjeta-Contenido {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Esto empuja el botón hacia abajo */
 }
 
+    .Tarjeta-Contenido h3 {
+        margin: 0 0 10px 0;
+        color: #50C878; /* Verde menta brillante */
+        font-size: 1.4em;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .Tarjeta-Contenido p {
+        font-size: 0.95em;
+        color: #c0c0c0;
+        line-height: 1.5;
+        flex-grow: 1; /* Esto hace que la descripción ocupe el espacio */
+        margin-bottom: 20px;
+    }
+
+    .Tarjeta-Contenido .Precio {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #ffffff;
+        margin-bottom: 25px;
+    }
+
+/* ==================================
+   BOTÓN DE RESERVA (AHORA ES UN <a>)
+================================== */
 .Reserva {
-    background-color: #4CAF50; /* Color del botón similar al de tu imagen */
+    background-color: #4CAF50; /* Tu verde */
     color: white;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    display: block;
 }
+
+    .Reserva:hover {
+        background-color: #45a049;
+        transform: scale(1.03);
+    }

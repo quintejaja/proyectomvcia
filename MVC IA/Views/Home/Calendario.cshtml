@@ -11,12 +11,7 @@
 
     <main class="schedule-container">
         <div class="schedule-header">
-        @* <a href="" class="back-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M15 18l-6-6 6-6" />
-                </svg>
-                Volver
-            </a> *@
+       
         <a asp-controller="Home" asp-action="Servicios" class="back-link">
             < Volver
         </a>
@@ -42,24 +37,25 @@
                 </div>
             </div>
 
-            <div class="time-slots-section">
-                <p id="timeSlotsDate">Disponibilidad para:</p>
-                <div class="time-slots-grid" id="timeSlotsGrid">
-                </div>
+        <div class="time-slots-section">
+            <p id="timeSlotsDate">Disponibilidad para:</p>
+            <div class="time-slots-grid" id="timeSlotsGrid">
             </div>
+        </div>
 
-            <div class="service-details-section">
-                <h3>Detalles del servicio</h3>
-                <div class="details-content">
-                    <p>Diagnóstico Inicial</p>
-                    <p id="selectedDateTime">Selecciona una fecha y hora</p>
-                    <p>100% Online</p>
-                    <p>Miembro del equipo n.º 1</p>
-                    <p>1h</p>
-                    <p id="servicePrice">$30</p>
-                <div class="service-details-section">
-                    <button class="next-button" id="nextButton" disabled onclick="redirectToForm()">Siguiente</button>
+        <div class="service-details-section">
+            <h3>Detalles del servicio</h3>
+                      
+                <div class="details-content" id="selectedDateTime">
+
                 </div>
+
+                <button class="next-button" id="nextButton" disabled>Siguiente</button>
+            
+        </div>
+   
+
+
         </div>
     </main>
 

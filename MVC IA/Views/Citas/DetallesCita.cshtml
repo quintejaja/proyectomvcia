@@ -1,0 +1,52 @@
+﻿@model MVC_IA.Models.Cita
+
+@{
+    ViewData["Title"] = "Detalles de la Cita";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg p-4">
+                <h1 class="card-title text-primary mb-4">📄 Detalles del Servicio</h1>
+                <p class="lead">Revisión de la cita ID: @Model.Id</p>
+                <hr />
+
+                <dl class="row">
+                    <dt class="col-sm-3">Estado:</dt>
+                    <dd class="col-sm-9">
+                        <span class="badge @(Model.Estado == "Pendiente" ? "bg-danger" :
+                                         Model.Estado == "En Curso" ? "bg-primary" :
+                                         "bg-success")">
+                            @Model.Estado
+                        </span>
+                    </dd>
+
+                    <dt class="col-sm-3">Cliente:</dt>
+                    <dd class="col-sm-9">@Model.Cliente.Username</dd>
+
+                    <dt class="col-sm-3">Fecha y Hora:</dt>
+                    <dd class="col-sm-9">@Model.FechaHora.ToString("dd MMMM yyyy, HH:mm") hs</dd>
+
+                    <dt class="col-sm-3">Técnico Asignado:</dt>
+                    <dd class="col-sm-9">@Model.Tecnico.Username</dd>
+
+                    <dt class="col-sm-3">Problema Reportado:</dt>
+                    <dd class="col-sm-9">
+                        <textarea class="form-control" rows="4" readonly>@Model.DescripcionProblema</textarea>
+                    </dd>
+                </dl>
+
+                <hr />
+
+                <div class="d-grid gap-2">
+                    <a asp-action="@(User.IsInRole("Cliente") ? "DashboardCliente" : "DashboardTecnico")"
+                       asp-controller="Citas"
+                       class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left-circle"></i> Volver al Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

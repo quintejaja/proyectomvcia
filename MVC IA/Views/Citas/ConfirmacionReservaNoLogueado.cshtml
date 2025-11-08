@@ -1,0 +1,92 @@
+﻿@* @{
+    ViewData["Title"] = "Confirma tu Identidad";
+    var fecha = TempData["FechaReserva"] as string;
+    var hora = TempData["HoraReserva"] as string;
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card p-4 shadow-sm">
+            <h3>📅 Servicio Seleccionado</h3>
+            <p><strong>Fecha:</strong> @fecha</p>
+            <p><strong>Hora de Inicio:</strong> @hora</p>
+            <hr />
+
+            <h2>¡Un paso más!</h2>
+            <p class="lead">Para confirmar tu reserva, necesitamos saber quién eres. Por favor, inicia sesión o regístrate.</p>
+
+            <div class="d-grid gap-2">
+                <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Citas/ConfirmacionReservaFinal" class="btn btn-success btn-lg">
+                    Iniciar Sesión
+                </a>
+                <a asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="/Citas/ConfirmacionReservaFinal" class="btn btn-outline-secondary">
+                    Registrarse
+                </a>
+            </div>
+
+            <p class="mt-3 text-muted">Serás redirigido para finalizar tu reserva después de iniciar sesión/registro.</p>
+        </div>
+    </div>
+</div> *@
+@* Views/Citas/ConfirmacionReservaNoLogueado.cshtml *@
+
+@{
+    ViewData["Title"] = "Confirma tu Identidad";
+
+    // **1. OBTENER LA FECHA Y HORA DEL VIEWBAG**
+    string fechaHoraString = ViewBag.FechaHoraReserva as string;
+
+    // Asumo que tu formato es "YYYY-MM-DD HH:MM", separamos para mostrarlo legible:
+    string fechaDisplay = "N/A";
+    string horaDisplay = "N/A";
+
+    if (!string.IsNullOrEmpty(fechaHoraString))
+    {
+        // Intentar separar la fecha de la hora (ej: "2025-11-03 16:00")
+        var partes = fechaHoraString.Split(' ');
+        if (partes.Length >= 2)
+        {
+            fechaDisplay = partes[0]; // La parte de la fecha
+            horaDisplay = partes[1]; // La parte de la hora
+        }
+        else
+        {
+            // Si solo viene un valor, úsalo como display
+            fechaDisplay = fechaHoraString;
+        }
+    }
+
+    // **2. CONSTRUIR LA URL DE RETORNO CORRECTA**
+    // Debe ser la URL completa que queremos re-ejecutar: /Citas/ConfirmacionReserva?fechaHora=...
+    // Usamos el 'ViewBag.FechaHoraReserva' (fechaHoraString) para el parámetro.
+    string returnUrl = Url.Action("ConfirmacionReserva", "Citas", new { fechaHora = fechaHoraString });
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card p-4 shadow-sm">
+            <h3>📅 Servicio Seleccionado</h3>
+            <p><strong>Fecha:</strong> @fechaDisplay</p>
+            <p><strong>Hora de Inicio:</strong> @horaDisplay</p>
+            <hr />
+
+            <h2>¡Un paso más!</h2>
+            <p class="lead">Para confirmar tu reserva, necesitamos saber quién eres. Por favor, inicia sesión o regístrate.</p>
+
+            <div class="d-grid gap-2">
+
+                @* **CAMBIO CLAVE 1: Usar etiquetas <a> normales con href=@Url.Action(...)** *@
+                <a href="@Url.Action("Login", "Home", new { returnUrl = returnUrl })" class="btn btn-success btn-lg">
+                    Iniciar Sesión
+                </a>
+
+                @* **CAMBIO CLAVE 2: Usar etiquetas <a> normales con href=@Url.Action(...)** *@
+                <a href="@Url.Action("SignUp", "Home", new { returnUrl = returnUrl })" class="btn btn-outline-secondary">
+                    Registrarse
+                </a>
+            </div>
+
+            <p class="mt-3 text-muted">Serás redirigido para finalizar tu reserva después de iniciar sesión/registro.</p>
+        </div>
+    </div>
+</div>

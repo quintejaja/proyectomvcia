@@ -1,0 +1,59 @@
+﻿@model List<MVC_IA.Models.Cita>
+
+@{
+    ViewData["Title"] = "Mis Reservas";
+    // Si usas un layout distinto, asegúrate de definirlo aquí:
+    // Layout = "_LayoutCliente";
+}
+
+<div class="container mt-5">
+    <h2>📅 Mis Próximas Reservas</h2>
+    <p>Aquí puedes ver el estado y el técnico asignado para cada uno de tus servicios.</p>
+    <hr />
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info" role="alert">
+            No tienes ninguna reserva de servicio programada. 
+            <a asp-controller="Home" asp-action="Calendario">¡Agenda una ahora!</a>
+        </div>
+    }
+    else
+    {
+        <table class="table table-hover shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Fecha y Hora</th>
+                    <th>Problema Reportado</th>
+                    <th>Técnico Asignado</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cita in Model)
+                {
+                    <tr>
+                        <td>@cita.FechaHora.ToString("dd MMM yyyy HH:mm")</td>
+                        <td>@cita.DescripcionProblema</td>
+                        <td>
+                             @* El técnico puede ser nulo (?) si aún no se ha asignado  *@
+                            @(cita.Tecnico?.Username ?? "Pendiente de Asignación")
+                        </td>
+                        <td>
+                            <span class="badge @(cita.Estado == "Pendiente" ? "bg-warning text-dark" : 
+                                               cita.Estado == "Completada" ? "bg-success" : 
+                                               "bg-primary")">
+                                @cita.Estado
+                            </span>
+                        </td>
+                        <td>
+                             @* Puedes añadir un botón de "Detalles" o "Cancelar" aquí  *@
+                            <a asp-action="DetallesCita" asp-route-id="@cita.Id" class="btn btn-sm btn-outline-info">Ver Detalles</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

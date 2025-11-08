@@ -1,0 +1,63 @@
+﻿@model List<MVC_IA.Models.Cita>
+
+@{
+    ViewData["Title"] = "Gestión de Servicios Asignados";
+    // Si usas un layout distinto, asegúrate de definirlo aquí:
+    // Layout = "_LayoutTecnico";
+}
+
+<div class="container mt-5">
+    <h2>🛠️ Servicios Asignados</h2>
+    <p class="lead">Bienvenido. Aquí están los servicios que debes atender.</p>
+    <hr />
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-success" role="alert">
+            ¡Felicidades! No tienes servicios pendientes por atender.
+        </div>
+    }
+    else
+    {
+        <table class="table table-striped shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Fecha y Hora</th>
+                    <th>Cliente</th>
+                    <th>Problema</th>
+                    <th>Estado</th>
+                    <th>Gestión</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cita in Model)
+                {
+                    <tr>
+                        <td>@cita.FechaHora.ToString("dd MMM yyyy HH:mm")</td>
+                        <td>@cita.Cliente.Username</td>
+                        <td>@cita.DescripcionProblema</td>
+                        <td>
+                            <span class="badge @(cita.Estado == "Pendiente" ? "bg-danger" : 
+                                               cita.Estado == "En Curso" ? "bg-primary" : 
+                                               "bg-success")">
+                                @cita.Estado
+                            </span>
+                        </td>
+                        <td>
+                            @* Ejemplo: Botones para cambiar el estado de la cita  *@
+                            @if (cita.Estado == "Pendiente")
+                            {
+                                <a asp-action="CambiarEstado" asp-route-id="@cita.Id" asp-route-estado="En Curso" class="btn btn-sm btn-primary">Iniciar Servicio</a>
+                            }
+                            else if (cita.Estado == "En Curso")
+                            {
+                                <a asp-action="CambiarEstado" asp-route-id="@cita.Id" asp-route-estado="Completada" class="btn btn-sm btn-success">Finalizar</a>
+                            }
+                            <a asp-action="DetallesCita" asp-route-id="@cita.Id" class="btn btn-sm btn-outline-info">Ver</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

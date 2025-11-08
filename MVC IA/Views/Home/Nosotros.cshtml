@@ -3,11 +3,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link rel="stylesheet" href="~/css/nosotrosstyle.css" />
+@* <link rel="stylesheet" href="~/css/nosotrosstyle.css" /> *@
 
-<div class="seccionimg">
-    <div class="nosotros-seccion">
-        <div class="nosotros-contenido">
+<div class="container-main">
+    <div class="bienvenida">
+
+        <div class="contenido-bienvenida">
             <h2>Nosotros</h2>
             <p>
                 Somos un equipo apasionado por la tecnología que creó ReparaYa, una
@@ -16,17 +17,16 @@
                 artificial, automatización y diseño simple para brindarte un
                 servicio rápido, seguro y completamente online.
             </p>
-            <div class="botondiv">
-                
-                    <button class="btn-diagn">Diagnostica y repara aquí</button>
-                
-            </div>
+
+            <a asp-controller="Home" asp-action="Servicios" class="btn-ver-mas">
+                Diagnostica y repara aquí
+            </a>
         </div>
 
-        <!-- AQUÍ VA EL CUADRO CON LA IMAGEN -->
-        <div class="nosotros-imagen"></div>
+        <div class="imagen-hero-derecha">
+            <img src="~/img/imagenfondo.jpeg" alt="Nuestro equipo trabajando" id="imagenIndex" />
+        </div>
     </div>
 </div>
 
 <script src="~/js/Diagnostico.js"></script>
-

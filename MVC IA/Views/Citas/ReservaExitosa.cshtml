@@ -1,0 +1,95 @@
+﻿@model MVC_IA.Models.Cita
+
+@{
+    ViewData["Title"] = "Reserva Confirmada";
+    // Asumo que usa el _Layout principal
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .confirm-box {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 30px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        background-color: #fff;
+    }
+    .confirm-header h1 {
+        color: #28a745; /* Verde éxito */
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+    .confirm-header h2 {
+        font-weight: 300;
+        color: #555;
+        margin-top: 5px;
+    }
+    .confirm-details {
+        background-color: #f8f9fa; /* Fondo gris claro */
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+    .confirm-details dl {
+        display: grid;
+        grid-template-columns: 1fr 2fr; /* Dos columnas */
+        gap: 10px;
+    }
+    .confirm-details dt {
+        font-weight: 700;
+        color: #333;
+    }
+    .confirm-details dd {
+        margin-bottom: 0;
+        color: #555;
+    }
+</style>
+
+<div class="confirm-box">
+    <div class="confirm-header text-center">
+        <h1><i class="bi bi-check-circle-fill"></i> Reserva Confirmada</h1>
+        <h2>¡Tu servicio ha sido agendado!</h2>
+    </div>
+
+    <hr class="my-4">
+
+    <p class="text-center">
+        Tu cita con el técnico ha sido registrada con éxito. Recibirás un correo electrónico con los detalles en breve.
+    </p>
+
+    <div class="confirm-details">
+        <h4 class="mb-3">Detalles de la Cita</h4>
+
+        <dl>
+            <dt>Número de Confirmación:</dt>
+            <dd>#@Model.Id</dd>
+
+            <dt>Estado:</dt>
+            <dd><span class="badge bg-warning text-dark">@Model.Estado</span></dd>
+
+            <dt>Fecha:</dt>
+            <dd>@Model.FechaHora.ToString("dddd, dd 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("es-ES"))</dd>
+
+            <dt>Hora:</dt>
+            <dd>@Model.FechaHora.ToString("HH:mm") hs</dd>
+
+            <dt>Técnico Asignado:</dt>
+            <dd>@Model.Tecnico.Username</dd>
+
+            <dt>Problema Reportado:</dt>
+            <dd>@Model.DescripcionProblema</dd>
+        </dl>
+    </div>
+
+    <div class="d-grid gap-2 mt-4">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-lg">
+            Volver al Inicio
+        </a>
+
+        <a asp-controller="Citas" asp-action="DashboardCliente" class="btn btn-outline-secondary">
+            Ver mis Citas
+        </a>
+    </div>
+</div>

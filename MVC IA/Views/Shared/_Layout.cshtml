@@ -20,64 +20,62 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Nosotros">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Servicios">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Contacto">Contacto</a>
                         </li>
                         
                     </ul>
 
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav ms-auto">
 
-                        <ul class="navbar-nav ms-auto">
-                            @if (Context.Session.GetString("username") != null)
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-primary"
+                                   asp-controller="Citas"
+                                   asp-action="@(User.IsInRole("Cliente") ? "DashboardCliente" : "DashboardTecnico")"
+                                   title="Mi Dashboard">
+                                    <strong>Mi Dashboard</strong>
+                                </a>
+                            </li>
+
+                            @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
-                                    <span class="navbar-text">Bienvenido, @Context.Session.GetString("username")</span>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Logout">Cerrar sesión</a>
+                                    <a class="nav-link text-danger" asp-controller="Home" asp-action="Usuarios">Administrar Usuarios</a>
                                 </li>
                             }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Nosotros">Nosotros</a>
-                                </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Servicios">Servicios</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Contacto">Contacto</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Login">Iniciar sesión</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="SignUp">Registrarse</a>
-                                </li>
-
-                            }
-                        </ul>
-
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            @if (Context.Session.GetString("rol") == "1")
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Usuarios">Administrar Usuarios</a>
-                                </li>
-                            }
-                        </ul>
-
+                            <li class="nav-item">
+                                <span class="navbar-text">Bienvenido, @User.Identity.Name</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Logout">Cerrar sesión</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Login">Iniciar sesión</a>
+                            </li>
+                            <li class_name="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="SignUp">Registrarse</a>
+                            </li>
+                        }
                     </ul>
-                </div>
 
+                </div>
             </div>
         </nav>
     </header>

@@ -9,14 +9,26 @@
 <script src="~/js/Login&RegistroScript.js"></script>
 
 <div class="container">
-    
+
     <div class="back-button-container">
         <a href="@Url.Action("Index", "Home")" class="btn-back-link">&larr; Volver al Inicio</a>
     </div>
 
     <div class="form-box">
         <h2>Crear Cuenta</h2>
-        <form asp-action="SignUp" asp-controller="Home" method="post">
+
+        @* 🚨 CORRECCIÓN CLAVE: asp-action debe coincidir con el nuevo método POST en HomeController *@
+        <form asp-action="RegistrarUsuario" asp-controller="Home" method="post">
+
+            @* Este campo es crucial para prevenir ataques CSRF *@
+            @Html.AntiForgeryToken()
+
+            @* Si viene de una reserva, necesitamos el returnUrl en el formulario *@
+            @if (ViewData["ReturnUrl"] != null)
+            {
+                <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+            }
+
             <div class="input-group">
                 <label asp-for="Username">Usuario</label>
                 <input asp-for="Username" type="text" required />
@@ -35,17 +47,22 @@
                 <span class="text-danger">@ViewBag.ConfirmPasswordError</span>
             </div>
 
+            @* 💡 Sugerencia: Si solo quieres que se registren como clientes (RolId=2), 
+               puedes ocultar este campo y asignarlo por defecto en el controlador, 
+               pero lo mantengo visible ya que usas ViewBag.Roles: *@
             <div class="form-group">
-                <label asp-for="RolId" class="control-label"></label>
+                <label asp-for="RolId" class="control-label">Tipo de Cuenta</label>
                 <select asp-for="RolId" asp-items="ViewBag.Roles" class="form-control"></select>
                 <span asp-validation-for="RolId" class="text-danger"></span>
             </div>
 
             <button type="submit" class="btn">Registrarse</button>
         </form>
+
         <p>
             ¿Ya tienes cuenta?
-            <a asp-action="Login" asp-controller="Home">Inicia Sesión</a>
+            @* 💡 Sugerencia: Pasa el returnUrl al Login también, si el usuario cambia de opinión *@
+            <a asp-action="Login" asp-controller="Home" asp-route-returnUrl="@ViewData["ReturnUrl"]">Inicia Sesión</a>
         </p>
 
         @if (ViewBag.Notification != null)

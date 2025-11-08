@@ -1,0 +1,42 @@
+﻿@model List<MVC_IA.Models.Cita>
+
+@{
+    ViewData["Title"] = "Mis Reservas";
+}
+
+<div class="container my-5">
+    <table class="table table-striped table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID Cita</th>
+                <th>Fecha y Hora</th>
+                <th>Técnico</th>
+                <th>Problema</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cita in Model)
+            {
+                <tr>
+                    <td>#@cita.Id</td>
+                    <td>@cita.FechaHora.ToString("dd/MM/yyyy HH:mm")</td>
+
+                    <td>
+                        @if (cita.Tecnico != null)
+                        {
+                            @cita.Tecnico.Username
+                        }
+                        else
+                        {
+                            <span>Asignando...</span>
+                        }
+                    </td>
+                    <td>@cita.DescripcionProblema</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

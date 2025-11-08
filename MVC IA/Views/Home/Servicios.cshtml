@@ -7,44 +7,45 @@
 
 <section class="SeccionServicios">
     <div class="Container-Servicios">
+
         <div class="Tarjeta-Servicios">
             <div class="Tarjeta-Imagen">
-                <img src="~/img/man-8106958.svg" alt="Diagnóstico">
+                <img src="~/img/DiagnosticoInicial.jpg"
+                     alt="Diagnóstico de PC">
             </div>
             <div class="Tarjeta-Contenido">
                 <h3>Diagnostico Inicial</h3>
-                <p>Diagnostico inicial y presupuesto estimado</p>
+                <p>Diagnostico inicial y presupuesto estimado para la reparación de tu equipo.</p>
                 <div class="Precio">$30</div>
-                <button class="Reserva">Reserva ahora!</button>
+                <a asp-controller="Home" asp-action="Calendario" class="Reserva">Reserva ahora!</a>
             </div>
         </div>
 
         <div class="Tarjeta-Servicios">
             <div class="Tarjeta-Imagen">
-                <img src="~/img/store-4156934.svg" alt="Insumos">
+                <img src="~/img/VentaDeInsumos.jpg"
+                     alt="Venta de Insumos">
             </div>
             <div class="Tarjeta-Contenido">
                 <h3>Venta de insumos</h3>
-                <p>Venta de componentes e insumos de informatica</p>
+                <p>Venta de componentes e insumos de informática al mejor precio y con garantía.</p>
                 <div class="Precio">$30</div>
-                <button class="Reserva">Reserva ahora!</button>
+                <a asp-controller="Home" asp-action="Calendario" class="Reserva">Reserva ahora!</a>
             </div>
         </div>
 
         <div class="Tarjeta-Servicios">
             <div class="Tarjeta-Imagen">
-                <img src="~/img/template-1599663.svg" alt="Reparación">
+                <img src="~/img/ReparacionCompleta.jpg"
+                     alt="Reparación de PC">
             </div>
             <div class="Tarjeta-Contenido">
                 <h3>Reparacion completa</h3>
-                <p>Reparacion exhaustiva de tu equipo</p>
+                <p>Reparación exhaustiva de tu equipo, incluyendo limpieza y optimización.</p>
                 <div class="Precio">$30</div>
-                <button class="Reserva">Reserva ahora!</button>
+                <a asp-controller="Home" asp-action="Calendario" class="Reserva">Reserva ahora!</a>
             </div>
         </div>
+
     </div>
 </section>
-
-@section Scripts {
-    <script src="~/js/ServiciosJS.js"></script>
-}

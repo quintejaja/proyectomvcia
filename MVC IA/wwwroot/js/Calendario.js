@@ -1,172 +1,4 @@
-﻿//const mockAvailability = {
-//    // Formato: 'YYYY-MM-DD'
-//    '2025-05-26': ['1:30 p.m.', '2:00 p.m.', '2:30 p.m.', '3:00 p.m.', '3:30 p.m.', '4:00 p.m.', '4:30 p.m.', '5:00 p.m.'],
-//    '2025-05-27': ['10:00 a.m.', '11:00 a.m.', '1:00 p.m.'],
-//    '2025-06-05': ['10:30 a.m.', '11:00 a.m.', '11:30 a.m.']
-//};
-
-//// --- ESTADO INICIAL ---
-//let currentDate = new Date();
-//let selectedDate = null;
-//let selectedTime = null;
-
-//// --- ELEMENTOS DEL DOM ---
-//const calendarGrid = document.getElementById('calendarGrid');
-//const currentMonthYearEl = document.getElementById('currentMonthYear');
-//const prevMonthBtn = document.getElementById('prevMonth');
-//const nextMonthBtn = document.getElementById('nextMonth');
-//const timeSlotsGrid = document.getElementById('timeSlotsGrid');
-//const timeSlotsDateEl = document.getElementById('timeSlotsDate');
-//const selectedDateTimeEl = document.getElementById('selectedDateTime');
-//const nextButton = document.getElementById('nextButton');
-
-//// --- FUNCIONES ---
-//function renderCalendar() {
-//    // Limpiamos el calendario
-//    calendarGrid.innerHTML = '';
-
-//    // Obtenemos el primer día del mes y el número de días
-//    const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-//    const endOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-//    const numDaysInMonth = endOfMonth.getDate();
-//    const firstDayIndex = startOfMonth.getDay(); // 0 = Domingo, 1 = Lunes, etc.
-
-//    // Actualizamos el mes y año
-//    const monthName = currentDate.toLocaleString('es-ES', { month: 'long' });
-//    const year = currentDate.getFullYear();
-//    currentMonthYearEl.textContent = `${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${year}`;
-
-//    // Rellenamos los espacios vacíos del inicio
-//    for (let i = 0; i < firstDayIndex; i++) {
-//        const emptyCell = document.createElement('div');
-//        emptyCell.classList.add('day-cell', 'disabled');
-//        calendarGrid.appendChild(emptyCell);
-//    }
-
-//    // Creamos las celdas para cada día del mes
-//    for (let day = 1; day <= numDaysInMonth; day++) {
-//        const dayCell = document.createElement('div');
-//        dayCell.classList.add('day-cell');
-//        dayCell.textContent = day;
-
-//        const dayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-//        const today = new Date();
-
-//        // Formato para comparar con la disponibilidad
-//        const formattedDate = dayDate.toISOString().slice(0, 10);
-
-//        // Clases especiales para el día actual y los días pasados
-//        if (dayDate.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0)) {
-//            dayCell.classList.add('current-day');
-//        }
-//        if (dayDate < today) {
-//            dayCell.classList.add('disabled');
-//        }
-
-//        // Si la fecha está seleccionada, le damos la clase 'active'
-//        if (selectedDate && formattedDate === selectedDate) {
-//            dayCell.classList.add('active');
-//        }
-
-//        // Asignamos el valor de la fecha para usarlo en el click
-//        dayCell.dataset.date = formattedDate;
-
-//        // Añadimos el evento de click
-//        dayCell.addEventListener('click', () => {
-//            if (!dayCell.classList.contains('disabled')) {
-//                // Removemos 'active' del día anterior
-//                const prevActive = calendarGrid.querySelector('.day-cell.active');
-//                if (prevActive) {
-//                    prevActive.classList.remove('active');
-//                }
-//                // Añadimos 'active' al día actual
-//                dayCell.classList.add('active');
-
-//                selectedDate = formattedDate;
-//                selectedTime = null; // Reiniciamos la hora
-//                renderTimeSlots(selectedDate);
-//                updateDetails();
-//            }
-//        });
-
-//        calendarGrid.appendChild(dayCell);
-//    }
-//}
-
-//function renderTimeSlots(date) {
-//    // Limpiamos los horarios
-//    timeSlotsGrid.innerHTML = '';
-
-//    // Obtenemos los horarios disponibles para la fecha
-//    const timeSlots = mockAvailability[date] || [];
-
-//    if (timeSlots.length > 0) {
-//        timeSlotsDateEl.textContent = `Disponibilidad para: ${new Date(date).toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}`;
-//        timeSlots.forEach(time => {
-//            const timeSlotBtn = document.createElement('button');
-//            timeSlotBtn.classList.add('time-slot');
-//            timeSlotBtn.textContent = time;
-
-//            if (selectedTime === time) {
-//                timeSlotBtn.classList.add('active');
-//            }
-
-//            timeSlotBtn.addEventListener('click', () => {
-//                const prevActive = timeSlotsGrid.querySelector('.time-slot.active');
-//                if (prevActive) {
-//                    prevActive.classList.remove('active');
-//                }
-//                timeSlotBtn.classList.add('active');
-//                selectedTime = time;
-//                updateDetails();
-//            });
-
-//            timeSlotsGrid.appendChild(timeSlotBtn);
-//        });
-//    } else {
-//        timeSlotsDateEl.textContent = `No hay disponibilidad para esta fecha.`;
-//    }
-//}
-
-//function updateDetails() {
-//    if (selectedDate && selectedTime) {
-//        const dateObj = new Date(selectedDate);
-//        const formattedDate = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-//        selectedDateTimeEl.textContent = `${formattedDate}, ${selectedTime}`;
-//        nextButton.disabled = false;
-//    } else {
-//        selectedDateTimeEl.textContent = `Selecciona una fecha y hora`;
-//        nextButton.disabled = true;
-//    }
-//}
-
-//// --- EVENTOS DE NAVEGACIÓN ---
-//prevMonthBtn.addEventListener('click', () => {
-//    currentDate.setMonth(currentDate.getMonth() - 1);
-//    renderCalendar();
-//});
-
-//nextMonthBtn.addEventListener('click', () => {
-//    currentDate.setMonth(currentDate.getMonth() + 1);
-//    renderCalendar();
-//});
-
-//// --- INICIALIZACIÓN ---
-//document.addEventListener('DOMContentLoaded', () => {
-//    renderCalendar();
-//    updateDetails();
-//});
-
-// ELIMINAR O COMENTAR la variable mockAvailability, ya no la necesitamos
-// const mockAvailability = { ... }; 
-
-// --- ESTADO INICIAL ---
-let currentDate = new Date();
-let selectedDate = null;
-let selectedTime = null;
-
-// --- ELEMENTOS DEL DOM ---
-const calendarGrid = document.getElementById('calendarGrid');
+﻿const calendarGrid = document.getElementById('calendarGrid');
 const currentMonthYearEl = document.getElementById('currentMonthYear');
 const prevMonthBtn = document.getElementById('prevMonth');
 const nextMonthBtn = document.getElementById('nextMonth');
@@ -175,16 +7,26 @@ const timeSlotsDateEl = document.getElementById('timeSlotsDate');
 const selectedDateTimeEl = document.getElementById('selectedDateTime');
 const nextButton = document.getElementById('nextButton');
 
+// --- VARIABLES GLOBALES DE ESTADO ---
+let currentDate = new Date();
+let selectedDate = null; // Almacena la fecha seleccionada (YYYY-MM-DD)
+let selectedTime = null; // Almacena la franja horaria seleccionada (HH:mm - HH:mm)
+
+
 // --- FUNCIONES ---
 function renderCalendar() {
-    // ... (El cuerpo de renderCalendar se mantiene igual, ya que maneja la UI del mes) ...
+    // Limpiamos el calendario
     calendarGrid.innerHTML = '';
 
+    // Obtenemos el primer día del mes y el número de días
     const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     const endOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
     const numDaysInMonth = endOfMonth.getDate();
-    const firstDayIndex = startOfMonth.getDay();
+    // Ajustamos getDay() para que la semana inicie en Lunes (0 = Lunes, 6 = Domingo)
+    // En la plantilla, si 0 es Domingo, lo convertimos a 6 y el resto -1
+    let firstDayIndex = startOfMonth.getDay() === 0 ? 6 : startOfMonth.getDay() - 1;
 
+    // Actualizamos el mes y año
     const monthName = currentDate.toLocaleString('es-ES', { month: 'long' });
     const year = currentDate.getFullYear();
     currentMonthYearEl.textContent = `${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${year}`;
@@ -212,6 +54,7 @@ function renderCalendar() {
         if (dayDate.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0)) {
             dayCell.classList.add('current-day');
         }
+        // Usamos solo la comparación de fecha (día < hoy) para deshabilitar días pasados
         if (dayDate < today) {
             dayCell.classList.add('disabled');
         }
@@ -238,7 +81,7 @@ function renderCalendar() {
                 selectedDate = formattedDate;
                 selectedTime = null; // Reinicia la hora
 
-                // *** CAMBIO CLAVE: Llama a la función asíncrona ***
+                // Llama a la función asíncrona que se comunica con C#
                 fetchTimeSlotsFromBackend(selectedDate);
 
                 updateDetails();
@@ -249,7 +92,6 @@ function renderCalendar() {
     }
 }
 
-
 /**
  * @name fetchTimeSlotsFromBackend
  * @description Llama a la acción del controlador C# para obtener horarios disponibles.
@@ -258,13 +100,15 @@ function renderCalendar() {
 async function fetchTimeSlotsFromBackend(date) {
     // 1. Mostrar estado de carga
     timeSlotsGrid.innerHTML = '';
-    timeSlotsDateEl.textContent = `Buscando disponibilidad para: ${new Date(date).toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}`;
+    const dateTitle = new Date(date + 'T00:00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+    timeSlotsDateEl.textContent = `Buscando disponibilidad para: ${dateTitle}`;
 
     try {
+        // NOTA: Se asume que el backend está en /Home/ObtenerDisponibilidad
         const response = await fetch('/Home/ObtenerDisponibilidad', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            // Enviamos la fecha al backend para que el servidor genere los intervalos
+            // Enviamos la fecha al backend
             body: JSON.stringify({ fecha: date })
         });
 
@@ -289,7 +133,9 @@ async function fetchTimeSlotsFromBackend(date) {
  */
 function renderTimeSlots(timeSlots, date) {
     timeSlotsGrid.innerHTML = ''; // Limpiamos los horarios
-    const dateObj = new Date(date);
+
+    // Convertimos la fecha con una hora ficticia para evitar problemas de zona horaria
+    const dateObj = new Date(date + 'T00:00:00');
 
     // Formato de fecha para el título de la columna de horarios
     const formattedTitle = dateObj.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
@@ -324,21 +170,24 @@ function renderTimeSlots(timeSlots, date) {
 
 function updateDetails() {
     if (selectedDate && selectedTime) {
-        const dateObj = new Date(selectedDate);
-        const formattedDate = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+        // Lógica para actualizar los detalles del servicio
+        const dateObj = new Date(selectedDate + 'T00:00:00');
+        const formattedDate = dateObj.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
 
-        // Asumiendo que selectedTime es el intervalo 'HH:MM - HH:MM'
-        selectedDateTimeEl.textContent = `${formattedDate}, ${selectedTime}`;
-
-        nextButton.disabled = false;
+        // Asumiendo que selectedDateTimeEl es el div de "Detalles del servicio"
+        selectedDateTimeEl.innerHTML = `
+            <strong>${formattedDate}, ${selectedTime}</strong><br>
+            100% Online<br>
+            Servicio con intervalo de 2 horas<br>
+        `;
+        nextButton.disabled = false; // Habilitar el botón Siguiente
     } else {
-        selectedDateTimeEl.textContent = `Selecciona una fecha y hora`;
-        nextButton.disabled = true;
+        selectedDateTimeEl.innerHTML = 'Selecciona una fecha y hora para ver los detalles.';
+        nextButton.disabled = true; // Deshabilitar si no hay selección
     }
 }
 
-// --- EVENTOS DE NAVEGACIÓN ---
-// ... (Se mantienen igual)
+// --- MANEJO DE EVENTOS INICIALES ---
 prevMonthBtn.addEventListener('click', () => {
     currentDate.setMonth(currentDate.getMonth() - 1);
     renderCalendar();
@@ -349,17 +198,30 @@ nextMonthBtn.addEventListener('click', () => {
     renderCalendar();
 });
 
-// --- INICIALIZACIÓN ---
-document.addEventListener('DOMContentLoaded', () => {
-    renderCalendar();
-    updateDetails();
+// --- LÓGICA DEL BOTÓN "SIGUIENTE" (LA PARTE CLAVE) ---
+nextButton.addEventListener('click', () => {
+    // 1. Validar que se haya seleccionado fecha y hora
+    if (!selectedDate || !selectedTime) {
+        alert('Por favor, selecciona una fecha y una franja horaria.');
+        return;
+    }
+
+    // 2. Preparar los parámetros como C# los espera
+    // selectedDate es "YYYY-MM-DD" (ej: "2025-11-12")
+    // selectedTime es "HH:mm - HH:mm" (ej: "14:00 - 16:00")
+    // Tu CitasController ya sabe cómo manejar estos dos formatos.
+
+    const fecha = selectedDate;
+    const hora = selectedTime;
+
+    // 3. Codificar la URL y Redirigir al endpoint correcto
+    const url = `/Citas/ConfirmacionReserva?fecha=${encodeURIComponent(fecha)}&hora=${encodeURIComponent(hora)}`;
+
+    // Redirección a la nueva vista de C# MVC
+    window.location.href = url;
 });
 
-// Agrega esta función para la redirección (si aún no la tienes)
-nextButton.addEventListener('click', () => {
-    if (selectedDate && selectedTime) {
-        const fecha = encodeURIComponent(selectedDate);
-        const hora = encodeURIComponent(selectedTime);
-        window.location.href = `/Home/Diagnosticabtn?fecha=${fecha}&hora=${hora}`;
-    }
-});
+
+// Inicialización
+renderCalendar();
+updateDetails(); // Para asegurar que el botón esté deshabilitado al inicio
