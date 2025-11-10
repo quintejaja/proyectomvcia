@@ -1,0 +1,153 @@
+﻿@model MVC_IA.Models.DiagnosticoViewModel
+@{
+    ViewData["Title"] = "Resultado del Diagnóstico";
+}
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center mb-4">✅ Diagnóstico por IA Completado</h1>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm border-success">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Predicción de Categoría</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Problema ingresado:</p>
+                    <blockquote class="blockquote">
+                        <p class="mb-0">@Model.Problema</p>
+                    </blockquote>
+                    <hr>
+                    <p class="card-text">El modelo lo clasifica como:</p>
+                    <h2 class="text-success text-center display-4">@Model.CategoriaML.ToUpper()</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">Análisis de Confianza (Probabilidades)</h4>
+                </div>
+                <ul class="list-group list-group-flush">
+                    @if (Model.Scores != null)
+                    {
+                        foreach (var score in Model.Scores)
+                        {
+                            var scoreDisplay = score.Value.ToString("P1"); // P1 = porcentaje con un decimal
+                            var listItemClass = score.Key == Model.CategoriaML ? "list-group-item-success font-weight-bold" : "";
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center @listItemClass">
+                                <strong>@score.Key.ToUpper():</strong>
+                                <span class="badge badge-primary badge-pill" style="font-size:1.1em;">@scoreDisplay</span>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="list-group-item text-danger">No se pudo obtener el Score de confianza.</li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm mt-4">
+        <div class="card-header bg-secondary text-white">
+            <h4>Datos del Cliente y Equipo</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Cliente:</dt>
+                <dd class="col-sm-9">@Model.Nombre @Model.Apellido (@Model.Email)</dd>
+
+                <dt class="col-sm-3">Ubicación:</dt>
+                <dd class="col-sm-9">@Model.Direccion, @Model.Ciudad (@Model.CodigoPostal), @Model.Pais</dd>
+
+                <dt class="col-sm-3">Tipo de Equipo:</dt>
+                <dd class="col-sm-9">@Model.TipoEquipo / @Model.SO / @Model.Fabricacion</dd>
+            </dl>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="text-center mt-4 mb-5">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary btn-lg mx-2">🏠 Volver al Inicio</a>
+        <button id="exportarTxt" class="btn btn-info btn-lg mx-2">💾 Exportar Datos (.TXT)</button>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        // 1. Aislar las variables de C# en variables JavaScript
+        // Esto previene errores de sintaxis al inyectar C# directamente en el script
+        const nombreCliente = "@Model.Nombre";
+        const apellidoCliente = "@Model.Apellido";
+        const emailCliente = "@Model.Email";
+        const telefonoCliente = "@Model.Telefono";
+
+        const categoriaML = "@Model.CategoriaML";
+        const problemaDesc = "@Model.Problema";
+
+        // Función para escapar el texto y prevenir problemas con comillas y saltos de línea
+        function escapeText(text) {
+            if (!text) return '';
+            return text.replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n');
+        }
+
+        document.getElementById('exportarTxt').addEventListener('click', function() {
+
+            // Construye el contenido del archivo TXT usando las variables JS
+            let data = "--- INFORME DE DIAGNÓSTICO ---\n";
+            data += "Fecha de Informe: " + new Date().toLocaleString() + "\n\n";
+
+            data += "--- PREDICCIÓN DE IA ---\n";
+            data += "Categoria Principal: " + categoriaML + "\n";
+            data += "Descripción del Problema:\n" + escapeText(problemaDesc) + "\n\n";
+
+            data += "--- PROBABILIDADES ---\n";
+
+            // Reconstruimos el bloque de Scores de forma segura en JS/Razor
+            @if (Model.Scores != null)
+            {
+                    foreach (var score in Model.Scores)
+                    {
+                            // Inyectamos las probabilidades directamente en la variable JS 'data'
+                            <text>data += "@score.Key.ToUpper(): @score.Value.ToString("P1")\n";</text>
+                    }
+            }
+
+            data += "\n--- DATOS DEL CLIENTE ---\n";
+            data += "Nombre Completo: " + nombreCliente + " " + apellidoCliente + "\n";
+            data += "Email: " + emailCliente + "\n";
+            data += "Teléfono: " + telefonoCliente + "\n";
+            data += "Ubicación: @Model.Direccion, @Model.Ciudad, @Model.Pais (@Model.CodigoPostal)\n";
+            data += "Equipo: @Model.TipoEquipo / @Model.SO / @Model.Fabricacion\n";
+
+            // Crea y descarga el archivo
+            const blob = new Blob([data], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+
+            // Nombre del archivo de descarga
+            a.download = 'Diagnostico_' + nombreCliente + apellidoCliente + '.txt';
+
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    </script>
+}
